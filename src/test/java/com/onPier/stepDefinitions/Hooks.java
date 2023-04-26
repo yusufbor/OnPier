@@ -1,7 +1,7 @@
-package com.stepDefinitions;
+package com.onPier.stepDefinitions;
 
-import com.utilities.ConfigurationReader;
-import com.utilities.Driver;
+import com.onPier.utilities.ConfigurationReader;
+import com.onPier.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;

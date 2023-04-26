@@ -1,4 +1,4 @@
-package com.runner;
+package com.onPier.runner;
 
 
 import io.cucumber.junit.Cucumber;
@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 		plugin = {"html:target/failed-html-report"},
 		features = "@target/rerun.txt",
-		glue = "com/step_definitions"
+		glue = "com/onPier/stepDefinitions"
 )
 
 public class FailedMyClassRunner {

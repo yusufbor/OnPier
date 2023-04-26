@@ -1,4 +1,4 @@
-package com.utilities;
+package com.onPier.utilities;
 
 import java.io.FileInputStream;
 import java.util.Properties;
