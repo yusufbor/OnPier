@@ -1,4 +1,4 @@
-package com.fleetApp.utilities;
+package com.utilities;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;

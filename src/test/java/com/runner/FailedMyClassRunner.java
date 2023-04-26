@@ -1,4 +1,4 @@
-package com.fleetApp.runners;
+package com.runner;
 
 
 import io.cucumber.junit.Cucumber;
