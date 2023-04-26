@@ -1,7 +1,7 @@
-package com.rapsodo.stepDefinitions;
+package com.stepDefinitions;
 
-import com.rapsodo.utilities.ConfigurationReader;
-import com.rapsodo.utilities.Driver;
+import com.utilities.ConfigurationReader;
+import com.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -14,7 +14,7 @@ public class Hooks {
     @Before
     public void setUp(){
         System.out.println("\tthis is coming from BEFORE");
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        Driver.getDriver().get(ConfigurationReader.get("url"));
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }

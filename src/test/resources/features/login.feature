@@ -1,4 +1,5 @@
-Feature: Checking the
+@wip
+Feature: Checking the related web page
 
   Scenario Outline:  Verify form structure changes based on private/company
     Given I am in personal information page
@@ -13,7 +14,7 @@ Feature: Checking the
 
 
   Scenario 2: Account holder and the person name can be same
-When I get the Account holder name
+    When I get the Account holder name
     Then I verify Account holder name and person name can be same
 
   Scenario 3: Verify user can not created with the same email

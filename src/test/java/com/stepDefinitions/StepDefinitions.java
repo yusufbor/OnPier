@@ -5,7 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class MyStepdefs {
+public class StepDefinitions {
     @Given("I am in personal information page")
     public void ıAmInPersonalInformationPage() {
         System.out.println("this is first step");

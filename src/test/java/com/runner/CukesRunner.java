@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 				  "rerun:target/rerun.txt"
 		},
 		features = "src/test/resources/features",
-		glue = "com/fleetApp/step_definitions",
+		glue = "com/stepDefinitions",
 		dryRun = false,
 		tags = "@wip"
 )
