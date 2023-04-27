@@ -12,6 +12,15 @@ Feature: Checking the related web page
       | Anrede | Vorname | Nachname | E-Mail-Adresse           | Kontoinhaber | IBAN                          |
       | Herr   | Jhon    | Doe      | anything%s@email.company | Jhon Doe     | ZBDE 4578 9089 6556 4334 5400 |
 
+  Scenario: Entering the information on form page
+    Given I am in personal information page
+
+      | Anrede         | Herr                          |
+      | Vorname        | Jhon                          |
+      | Nachname       | Doe                           |
+      | E-Mail-Adresse | anything%s@email.company      |
+      | Kontoinhaber   | Jhon Doe                      |
+      | IBAN           | ZBDE 4578 9089 6556 4334 5400 |
 
   Scenario:  Account holder and the person name can be same
     When I get the Account holder name
