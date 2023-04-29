@@ -10,26 +10,44 @@ public class FormPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    @FindBy(name = "")
-    public WebElement selectAnrede;
 
-    @FindBy(name = "")
-    public WebElement inputVorname;
+    @FindBy(xpath = "//input[@id='mat-radio-2-input']")
+    public static WebElement PrivatPerson;
 
-    @FindBy(name = "")
-    public WebElement inputNachname;
+    public void PrivatPerson(){
+        this.PrivatPerson.click();
+    }
 
-    @FindBy(name = "")
-    public WebElement inputEMailAdresse;
+    @FindBy( xpath= "//input[@id='mat-radio-3-input']")
+    public static WebElement Unternehmen;
 
-    @FindBy(name = "")
-    public WebElement inputKontoinhaber;
+    public void Unternehmen(){
+        this.Unternehmen.click();
+    }
 
-    @FindBy(name = "")
-    public WebElement inputIBAN;
+    @FindBy(className = "mdc-list-item__primary-text")
+    public static WebElement selectAnrede;
 
-    @FindBy(xpath = "")
-    public WebElement loginButton;
+    @FindBy(xpath = "//input[@class='rounded w-full pl-4 ng-valid ng-star-inserted ng-dirty ng-touched']")
+    public static WebElement inputVorname;
+
+    @FindBy(xpath = "//input[@placeholder='Mustermann']")
+    public static WebElement inputNachname;
+
+    @FindBy(xpath = "(//input[@class='rounded w-full pl-4 ng-valid ng-star-inserted ng-dirty ng-touched'])[3]")
+    public static WebElement inputEMailAdresse;
+
+    @FindBy(xpath = "(//input[@class='rounded w-full pl-4 ng-valid ng-star-inserted ng-dirty ng-touched'])[4]")
+    public static WebElement inputKontoinhaber;
+
+    @FindBy(xpath = "//input[@class='rounded w-full pl-4 ng-star-inserted ng-dirty ng-touched ng-valid']")
+    public static WebElement inputIBAN;
+
+    @FindBy(linkText = "Weiter")
+    public static WebElement weiterButton;
+
+
+
 
     public void login(String vorname, String nachname, String email, String kontainhaber, String iban){
         selectAnrede.click();
@@ -38,7 +56,6 @@ public class FormPage {
         inputEMailAdresse.sendKeys(email);
         inputKontoinhaber.sendKeys(kontainhaber);
         inputIBAN.sendKeys(iban);
-        loginButton.click();
     }
 
 }
