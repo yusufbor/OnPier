@@ -17,7 +17,7 @@ public class MyStepdefs {
 
     @Given("user is on Privatperson form")
     public void userIsOnPrivatpersonForm() {
-        formPage.PrivatPerson();
+
     }
 
     @When("user enters title {string}")

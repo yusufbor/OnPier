@@ -12,10 +12,10 @@ public class FormPage {
 
 
     @FindBy(xpath = "//input[@id='mat-radio-2-input']")
-    public static WebElement PrivatPerson;
+    public static WebElement privatPerson;
 
     @FindBy(xpath = "//input[@id='mat-radio-3-input']")
-    public static WebElement Unternehmen;
+    public static WebElement unternehmen;
 
     @FindBy(id = "mat-select-value-1")
     public static WebElement selectAnrede;
