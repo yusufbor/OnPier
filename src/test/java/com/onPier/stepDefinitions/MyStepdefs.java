@@ -19,7 +19,11 @@ public class MyStepdefs {
         formPage.sleep();
         landingPage.flexPramieBentragen.click();
         formPage.sleep();
-        formPage.fahrzeugscheinVorderseite.click();
+        formPage.fahrzeugscheinVorderseite.sendKeys("ss1.png");
+        formPage.sleep();
+        formPage.fahrzeugscheinRückseite.sendKeys("ss1.png");
+        formPage.sleep();
+
 
     }
 
