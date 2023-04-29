@@ -10,42 +10,47 @@ public class FormPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    @FindBy(xpath = "(//div[@class='space-y-1 text-center'])[1]")
+    public WebElement fahrzeugscheinVorderseite ;
+
+    @FindBy(xpath = "(//div[@class='space-y-1 text-center'])[2]")
+    public WebElement fahrzeugscheinRückseite;
 
     @FindBy(xpath = "//input[@id='mat-radio-2-input']")
-    public static WebElement privatPerson;
+    public WebElement privatPerson;
 
     @FindBy(xpath = "//input[@id='mat-radio-3-input']")
-    public static WebElement unternehmen;
+    public WebElement unternehmen;
 
     @FindBy(id = "mat-select-value-1")
-    public static WebElement selectAnrede;
+    public WebElement selectAnrede;
 
     @FindBy(xpath = "//mat-option[@id='mat-option-0']")
-    public static WebElement selectHerr;
+    public WebElement selectHerr;
 
     @FindBy(xpath = "//mat-option[@id='mat-option-1']")
-    public static WebElement selectFrau;
+    public WebElement selectFrau;
 
     @FindBy(xpath = "//mat-option[@id='mat-option-2']")
-    public static WebElement selectDivers;
+    public WebElement selectDivers;
 
     @FindBy(xpath = "//input[@placeholder='Max']")
-    public static WebElement inputVorname;
+    public WebElement inputVorname;
 
     @FindBy(xpath = "//input[@placeholder='Mustermann']")
-    public static WebElement inputNachname;
+    public WebElement inputNachname;
 
     @FindBy(xpath = "//input[@placeholder='max.mustermann@muster.de']")
-    public static WebElement inputEMailAdresse;
+    public WebElement inputEMailAdresse;
 
     @FindBy(xpath = "//input[@placeholder='Max Mustermann']")
-    public static WebElement inputKontoinhaber;
+    public WebElement inputKontoinhaber;
 
     @FindBy(xpath = "//input[@placeholder='z.B. DE45 7890 8965 5643 3454 00']")
-    public static WebElement inputIBAN;
+    public WebElement inputIBAN;
 
     @FindBy(linkText = "Weiter")
-    public static WebElement weiterButton;
+    public WebElement weiterButton;
 
 
     public void login(String vorname, String nachname, String email, String kontainhaber, String iban) {
@@ -57,4 +62,11 @@ public class FormPage {
         inputIBAN.sendKeys(iban);
     }
 
+    public void sleep(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.onPier.stepDefinitions;
 
 import com.onPier.pages.FormPage;
+import com.onPier.pages.LandingPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,10 +10,17 @@ import io.cucumber.java.en.When;
 public class MyStepdefs {
 
     FormPage formPage = new FormPage();
+    LandingPage landingPage = new LandingPage();
 
     @Given("user is on Persönliche Daten eingeben page")
     public void userIsOnPersönlicheDatenEingebenPage() {
         System.out.println("this is first step");
+        landingPage.klasseM1.click();
+        formPage.sleep();
+        landingPage.flexPramieBentragen.click();
+        formPage.sleep();
+        formPage.fahrzeugscheinVorderseite.click();
+
     }
 
     @Given("user is on Privatperson form")
