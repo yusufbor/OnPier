@@ -19,9 +19,10 @@ public class MyStepdefs {
         formPage.sleep();
         landingPage.flexPramieBentragen.click();
         formPage.sleep();
-        formPage.fahrzeugscheinVorderseite.sendKeys("ss1.png");
+        String path = "ss1.png";
+        formPage.fahrzeugscheinVorderseite.sendKeys(path);
         formPage.sleep();
-        formPage.fahrzeugscheinRückseite.sendKeys("ss1.png");
+        formPage.fahrzeugscheinRückseite.sendKeys(path);
         formPage.sleep();
 
 

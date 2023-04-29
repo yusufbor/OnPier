@@ -23,4 +23,8 @@ public class LandingPage {
 
     @FindBy(xpath = "(//span[.=' Prämie beantragen '])[2]")
     public WebElement sofortPramieBentragen;
+
+    @FindBy(xpath = "(//div[@class='flex justify-center items-center'])[1]")
+    public WebElement weiterButton;
+
 }
