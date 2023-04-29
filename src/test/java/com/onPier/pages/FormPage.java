@@ -6,36 +6,28 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class FormPage {
-    public FormPage(){
-        PageFactory.initElements(Driver.getDriver(),this);
+    public FormPage() {
+        PageFactory.initElements(Driver.getDriver(), this);
     }
 
 
     @FindBy(xpath = "//input[@id='mat-radio-2-input']")
     public static WebElement PrivatPerson;
 
-    public void PrivatPerson(){
-        this.PrivatPerson.click();
-    }
-
-    @FindBy( xpath= "//input[@id='mat-radio-3-input']")
+    @FindBy(xpath = "//input[@id='mat-radio-3-input']")
     public static WebElement Unternehmen;
-
-    public void Unternehmen(){
-        this.Unternehmen.click();
-    }
 
     @FindBy(id = "mat-select-value-1")
     public static WebElement selectAnrede;
 
-
     @FindBy(xpath = "//mat-option[@id='mat-option-0']")
     public static WebElement selectHerr;
+
     @FindBy(xpath = "//mat-option[@id='mat-option-1']")
     public static WebElement selectFrau;
+
     @FindBy(xpath = "//mat-option[@id='mat-option-2']")
     public static WebElement selectDivers;
-
 
     @FindBy(xpath = "//input[@placeholder='Max']")
     public static WebElement inputVorname;
@@ -56,9 +48,7 @@ public class FormPage {
     public static WebElement weiterButton;
 
 
-
-
-    public void login(String vorname, String nachname, String email, String kontainhaber, String iban){
+    public void login(String vorname, String nachname, String email, String kontainhaber, String iban) {
         selectAnrede.click();
         inputVorname.sendKeys(vorname);
         inputNachname.sendKeys(nachname);
