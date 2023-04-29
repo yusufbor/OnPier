@@ -25,22 +25,31 @@ public class FormPage {
         this.Unternehmen.click();
     }
 
-    @FindBy(className = "mdc-list-item__primary-text")
+    @FindBy(id = "mat-select-value-1")
     public static WebElement selectAnrede;
 
-    @FindBy(xpath = "//input[@class='rounded w-full pl-4 ng-valid ng-star-inserted ng-dirty ng-touched']")
+
+    @FindBy(xpath = "//mat-option[@id='mat-option-0']")
+    public static WebElement selectHerr;
+    @FindBy(xpath = "//mat-option[@id='mat-option-1']")
+    public static WebElement selectFrau;
+    @FindBy(xpath = "//mat-option[@id='mat-option-2']")
+    public static WebElement selectDivers;
+
+
+    @FindBy(xpath = "//input[@placeholder='Max']")
     public static WebElement inputVorname;
 
     @FindBy(xpath = "//input[@placeholder='Mustermann']")
     public static WebElement inputNachname;
 
-    @FindBy(xpath = "(//input[@class='rounded w-full pl-4 ng-valid ng-star-inserted ng-dirty ng-touched'])[3]")
+    @FindBy(xpath = "//input[@placeholder='max.mustermann@muster.de']")
     public static WebElement inputEMailAdresse;
 
-    @FindBy(xpath = "(//input[@class='rounded w-full pl-4 ng-valid ng-star-inserted ng-dirty ng-touched'])[4]")
+    @FindBy(xpath = "//input[@placeholder='Max Mustermann']")
     public static WebElement inputKontoinhaber;
 
-    @FindBy(xpath = "//input[@class='rounded w-full pl-4 ng-star-inserted ng-dirty ng-touched ng-valid']")
+    @FindBy(xpath = "//input[@placeholder='z.B. DE45 7890 8965 5643 3454 00']")
     public static WebElement inputIBAN;
 
     @FindBy(linkText = "Weiter")
