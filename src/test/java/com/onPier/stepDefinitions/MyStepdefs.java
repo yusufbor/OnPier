@@ -1,131 +1,78 @@
 package com.onPier.stepDefinitions;
 
+import com.onPier.pages.FahrzeugscheinHochladen;
 import com.onPier.pages.FormPage;
 import com.onPier.pages.LandingPage;
+import com.onPier.utilities.ConfigurationReader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.util.Date;
+
+import static com.onPier.utilities.BrowserUtils.*;
+import static org.junit.Assert.*;
+
 public class MyStepdefs {
 
     FormPage formPage = new FormPage();
     LandingPage landingPage = new LandingPage();
+    FahrzeugscheinHochladen fahrzeugscheinVorderseite = new FahrzeugscheinHochladen();
 
     @Given("user is on Persönliche Daten eingeben page")
-    public void userIsOnPersönlicheDatenEingebenPage() {
-        System.out.println("this is first step");
-        landingPage.klasseM1.click();
-        formPage.sleep();
-        landingPage.flexPramieBentragen.click();
-        formPage.sleep();
-        String path = "ss1.png";
-        formPage.fahrzeugscheinVorderseite.sendKeys(path);
-        formPage.sleep();
-        formPage.fahrzeugscheinRückseite.sendKeys(path);
-        formPage.sleep();
-
-
+    public void userIsOnPersonlicheDatenEingebenPage() {
+        assertEquals("THG Prämie",getTitle());
     }
 
-    @Given("user is on Privatperson form")
-    public void userIsOnPrivatpersonForm() {
-
+    @When("user selects vehicle class")
+    public void userSelectsVehicleClass() {
+        click(landingPage.klasseM1);
     }
 
-    @When("user enters title {string}")
-    public void userEntersTitle(String arg0) {
+    @And("user selects flexPramieBentragen package")
+    public void userSelectsFlexPramieBentragenPackage() {
+        click(landingPage.flexPramieBentragen);
     }
 
-    @And("user enters first name {string}")
-    public void userEntersFirstName(String arg0) {
+    @And("user uploads images of vehicle registration")
+    public void userUploadsImagesOfVehicleRegistration() {
+        //to get the dynamic path of the image
+        String path = System.getProperty("user.dir")+ ConfigurationReader.get("imagePath");
+        sendKeys(fahrzeugscheinVorderseite.fahrzeugscheinVorderseite,path);
+        sendKeys(fahrzeugscheinVorderseite.fahrzeugscheinRuckseite,path);
     }
 
-    @And("user enters surname {string}")
-    public void userEntersSurname(String arg0) {
+    @And("user clicks on {string} button")
+    public void userClicksOnButton(String buttonName) {
+        landingPage.clickButton(buttonName);
     }
 
-    @And("user enters email adress {string}")
-    public void userEntersEmailAdress(String arg0) {
+    @Then("I verify title as {string}")
+    public void iVerifyTitleAs(String expectedTitle) {
+        assertEquals(getTitle(),expectedTitle);
     }
 
-    @And("user enters account holder {string}")
-    public void userEntersAccountHolder(String arg0) {
+    @When("user selects title {string}")
+    public void userEntersTitle(String title) {
+        formPage.selectTitle(title);
     }
 
-    @And("user enters iban no {string}")
-    public void userEntersIbanNo(String arg0) {
+    @And("user fills {string} as {string}")
+    public void userFillsAs(String label, String value) {
+        if(value.contains("%s"))
+            value = String.format(value, new Date().getTime());
+        formPage.fill(label,value);
     }
 
     @And("user clicks on Weiter button")
     public void userClicksOnWeiterButton() {
+        click(formPage.weiterButton);
     }
 
     @Then("form is created with given personal information")
     public void formIsCreatedWithGivenPersonalInformation() {
+        System.out.println("the validation of form data could not be done since the page is not supporting automation..");
     }
 
-    @When("user enters a letter as a name")
-    public void userEntersALetterAsAName() {
-    }
-
-    @Then("error message appears under the Vorname field")
-    public void errorMessageAppearsUnderTheVornameField() {
-    }
-
-    @When("user enters a letter as a surname")
-    public void userEntersALetterAsASurname() {
-    }
-
-    @Then("error message appears under the Nachname field")
-    public void errorMessageAppearsUnderTheNachnameField() {
-    }
-
-    @When("user enters a different account holder name")
-    public void userEntersADifferentAccountHolderName() {
-    }
-
-    @Then("user verifies account holder name and person name can be different")
-    public void userVerifiesAccountHolderNameAndPersonNameCanBeDifferent() {
-    }
-
-    @When("user enters the Account holder name")
-    public void userEntersTheAccountHolderName() {
-    }
-
-    @Then("user verifies Account holder name and person name can be same")
-    public void userVerifiesAccountHolderNameAndPersonNameCanBeSame() {
-    }
-
-    @When("user enters invalid email")
-    public void userEntersInvalidEmail() {
-    }
-
-    @Then("the form is created with invalid email")
-    public void theFormIsCreatedWithInvalidEmail() {
-    }
-
-    @When("user enters  the same email")
-    public void userEntersTheSameEmail() {
-    }
-
-    @Then("new user is created with the same email")
-    public void newUserIsCreatedWithTheSameEmail() {
-    }
-
-    @When("user enters the {string} number in the IBAN box")
-    public void userEntersTheNumberInTheIBANBox(String arg0) {
-    }
-
-    @Then("account is created")
-    public void accountIsCreated() {
-    }
-
-    @When("user enters the invalid {string} number in the IBAN box")
-    public void userEntersTheInvalidNumberInTheIBANBox(String arg0) {
-    }
-
-    @Then("warning message is on screen, under the IBAN box")
-    public void warningMessageIsOnScreenUnderTheIBANBox() {
-    }
 }

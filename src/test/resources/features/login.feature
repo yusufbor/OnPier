@@ -3,22 +3,27 @@ Feature: Checking the related web page
 
   Background: For the scenarios in the feature file, user should be on the second page of the form
     Given user is on Persönliche Daten eingeben page
-    And user is on Privatperson form
+    When user selects vehicle class
+    And user selects flexPramieBentragen package
+    And user uploads images of vehicle registration
+    And user clicks on "Weiter " button
+    Then I verify title as "THG Prämie"
 
 
-  Scenario Outline: User can fill the form with valid data
-    When user enters title "<Anrede>"
-    And user enters first name "<Vorname>"
-    And user enters surname "<Nachname>"
-    And user enters email adress "<E-Mail-Adresse>"
-    And user enters account holder "<Kontoinhaber>"
-    And user enters iban no "<IBAN>"
+  @happyPath
+  Scenario Outline: Form submission
+    When user selects title "<title>"
+    And user fills "Vorname" as "<firstName>"
+    And user fills "Nachname" as "<lastName>"
+    And user fills "E-Mail-Adresse" as "<email>"
+    And user fills "Kontoinhaber" as "<accountHolder>"
+    And user fills "IBAN" as "<IBAN>"
     And user clicks on Weiter button
     Then form is created with given personal information
 
     Examples:
-      | Anrede | Vorname | Nachname | E-Mail-Adresse           | Kontoinhaber | IBAN                          |
-      | Herr   | John    | Doe      | anything%s@email.company | John Doe     | ZBDE 4578 9089 6556 4334 5400 |
+      | title | firstName | lastName | email                    | accountHolder | IBAN                          |
+      | Herr  | John      | Doe      | anything%s@email.company | John Doe      | ZBDE 4578 9089 6556 4334 5400 |
 
   Scenario: user can not enter invalid name
     When user enters a letter as a name
@@ -57,12 +62,12 @@ Feature: Checking the related web page
     Then account is created
 
     Examples:
-      | IBAN                                               |
-      | 1234 1234 1234 1                                   |
-      | 1234 1234 1234 12                                  |
-      | 1234 1234 1234 1234 1234                           |
-      | 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234  |
-      | 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1|
+      | IBAN                                                |
+      | 1234 1234 1234 1                                    |
+      | 1234 1234 1234 12                                   |
+      | 1234 1234 1234 1234 1234                            |
+      | 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234   |
+      | 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1 |
 
 
   Scenario Outline: Account is not created with invalid IBAN
@@ -70,10 +75,12 @@ Feature: Checking the related web page
     Then warning message is on screen, under the IBAN box
 
     Examples:
-      | IBAN                              |
-      | 1234 1234 1234                    |
-      | 1234 1234 12                      |
-      | 1234 1234                         |
-      | 1234 1                            |
+      | IBAN           |
+      | 1234 1234 1234 |
+      | 1234 1234 12   |
+      | 1234 1234      |
+      | 1234 1         |
 
+
+  Scenario: User cancels form
 

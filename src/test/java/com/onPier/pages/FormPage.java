@@ -1,20 +1,13 @@
 package com.onPier.pages;
 
+import com.onPier.utilities.BrowserUtils;
 import com.onPier.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class FormPage {
-    public FormPage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
-
-    @FindBy(xpath = "(//div[@class='space-y-1 text-center'])[1]")
-    public WebElement fahrzeugscheinVorderseite ;
-
-    @FindBy(xpath = "(//div[@class='space-y-1 text-center'])[2]")
-    public WebElement fahrzeugscheinRückseite;
+public class FormPage extends BasePage {
 
     @FindBy(xpath = "//input[@id='mat-radio-2-input']")
     public WebElement privatPerson;
@@ -24,15 +17,6 @@ public class FormPage {
 
     @FindBy(id = "mat-select-value-1")
     public WebElement selectAnrede;
-
-    @FindBy(xpath = "//mat-option[@id='mat-option-0']")
-    public WebElement selectHerr;
-
-    @FindBy(xpath = "//mat-option[@id='mat-option-1']")
-    public WebElement selectFrau;
-
-    @FindBy(xpath = "//mat-option[@id='mat-option-2']")
-    public WebElement selectDivers;
 
     @FindBy(xpath = "//input[@placeholder='Max']")
     public WebElement inputVorname;
@@ -49,9 +33,8 @@ public class FormPage {
     @FindBy(xpath = "//input[@placeholder='z.B. DE45 7890 8965 5643 3454 00']")
     public WebElement inputIBAN;
 
-    @FindBy(linkText = "Weiter")
+    @FindBy(xpath = "//div[.='Weiter ']")
     public WebElement weiterButton;
-
 
     public void login(String vorname, String nachname, String email, String kontainhaber, String iban) {
         selectAnrede.click();
@@ -62,11 +45,10 @@ public class FormPage {
         inputIBAN.sendKeys(iban);
     }
 
-    public void sleep(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void selectTitle(String title){
+        BrowserUtils.click(selectAnrede);
+        String xpath= String.format("//*[.='%s']", title);
+        BrowserUtils.click(By.xpath(xpath));
     }
+
 }

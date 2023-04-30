@@ -5,10 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage {
-    public LandingPage(){
-        PageFactory.initElements(Driver.getDriver(),this);
-    }
+public class LandingPage extends BasePage {
     @FindBy(xpath = "(//label[@class='h-auto md:w-full'])[1]")
     public WebElement klasseM1;
 
