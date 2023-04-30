@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.Date;
+import java.util.List;
 
 import static com.onPier.utilities.BrowserUtils.*;
 import static org.junit.Assert.*;
@@ -68,11 +69,16 @@ public class MyStepdefs {
     @And("user clicks on Weiter button")
     public void userClicksOnWeiterButton() {
         click(formPage.weiterButton);
+
     }
 
     @Then("form is created with given personal information")
-    public void formIsCreatedWithGivenPersonalInformation() {
+    public void formIsCreatedWithGivenPersonalInformation(List<String> list) {
+        for (String each : list) {
+            formPage.checkInfo(each);
+        }
         System.out.println("the validation of form data could not be done since the page is not supporting automation..");
     }
+
 
 }

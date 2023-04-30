@@ -33,7 +33,7 @@ public class FormPage extends BasePage {
     @FindBy(xpath = "//input[@placeholder='z.B. DE45 7890 8965 5643 3454 00']")
     public WebElement inputIBAN;
 
-    @FindBy(xpath = "//div[.='Weiter ']")
+    @FindBy(xpath = "(//div[.='Weiter '])[2]")
     public WebElement weiterButton;
 
     public void login(String vorname, String nachname, String email, String kontainhaber, String iban) {

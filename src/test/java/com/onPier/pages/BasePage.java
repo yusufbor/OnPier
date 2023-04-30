@@ -2,10 +2,13 @@ package com.onPier.pages;
 
 import com.onPier.utilities.BrowserUtils;
 import com.onPier.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.Map;
 
 public abstract class BasePage {
 
@@ -27,7 +30,13 @@ public abstract class BasePage {
 
     public void fill(String labelName, String value) {
         String xpath = String.format("//label[.='%s']/..//input", labelName);
-        WebElement elemet = BrowserUtils.getElemet(By.xpath(xpath));
-        BrowserUtils.sendKeys(elemet, value);
+        WebElement element = BrowserUtils.getElemet(By.xpath(xpath));
+        BrowserUtils.sendKeys(element, value);
+    }
+
+    public void checkInfo(String labelName){
+        String xpath = String.format("//td[.='%s:']/following-sibling::td", labelName);
+        WebElement element = BrowserUtils.getElemet(By.xpath(xpath));
+        System.out.println("element.getText() = " + element.getText());
     }
 }

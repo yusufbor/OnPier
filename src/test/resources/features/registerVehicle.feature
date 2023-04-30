@@ -20,6 +20,13 @@ Feature: Checking the related web page
     And user fills "IBAN" as "<IBAN>"
     And user clicks on Weiter button
     Then form is created with given personal information
+      | Anrede         |
+      | Vorname        |
+      | Nachname       |
+      | E-Mail-Adresse |
+      | Kontoinhaber   |
+      | IBAN           |
+
 
     Examples:
       | title | firstName | lastName | email                    | accountHolder | IBAN                          |
