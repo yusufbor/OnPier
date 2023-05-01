@@ -1,3 +1,4 @@
+@wip
 Feature: Checking the related web page
 
   Background: For the scenarios in the feature file, user should be on the second page of the form
@@ -50,7 +51,6 @@ Feature: Checking the related web page
       | E-Mail-Adresse | email@example.com             | none                                                 |
 
 
-  @happyPath
   Scenario: User cancels form
     And user clicks on Zurück button
     Then user lands on previous page
