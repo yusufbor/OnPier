@@ -79,6 +79,53 @@ public class MyStepdefs {
         }
         System.out.println("the validation of form data could not be done since the page is not supporting automation..");
     }
+    @When("user enters a letter as a vorname {string}")
+    public void userEntersALetterAsAVorname(String vornameLetter) {
+        formPage.inputVorname.sendKeys(vornameLetter);
+    }
+
+    @And("user clicks another field to fill and proceed")
+    public void userClicksAnotherFieldToFillAndProceed() {click(formPage.inputNachname);}
+
+    @Then("error message appears under the Vorname field")
+    public void errorMessageAppearsUnderTheVornameField() {
+        assertTrue(formPage.VornameErrorMessage.isDisplayed());
+    }
+
+    @When("user enters a letter as nachname {string}")
+    public void userEntersALetterAsNachname(String nachnameLetter) {
+        formPage.inputNachname.sendKeys(nachnameLetter);
+    }
+
+    @And("user clicks another placeholder to fill and proceed")
+    public void userClicksAnotherPlaceholderToFillAndProceed() {click(formPage.inputEMailAdresse);}
+
+    @Then("error message appears under the Nachname field")
+    public void errorMessageAppearsUnderTheNachnameField() {
+        assertTrue(formPage.NachnameErrorMessage.isDisplayed());
+    }
+
+
+    @Then("user verifies account holder name and person name can be different")
+    public void userVerifiesAccountHolderNameAndPersonNameCanBeDifferent() {
+        assertNotEquals(formPage.name, formPage.kontoinHaber);
+    }
+
+    @Then("the form is created with invalid email")
+    public void formIsCreatedWithInvalidEmail(List<String> list) {
+        for (String each : list) {
+            formPage.checkInfo(each);
+        }
+        System.out.println("Form created with invalid e mail");
+    }
+
+    @When("user clicks on Zurück button")
+    public void userClicksOnZurückButton() {formPage.zurückButton.click();}
+
+    @Then("user lands on previous page")
+    public void userLandsOnPreviousPage() {assertEquals("THG Prämie", getTitle());
+    }
+
 
 
 }

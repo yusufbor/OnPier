@@ -1,9 +1,7 @@
 package com.onPier.pages;
 
-import com.onPier.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class LandingPage extends BasePage {
     @FindBy(xpath = "(//label[@class='h-auto md:w-full'])[1]")

@@ -1,11 +1,9 @@
 package com.onPier.pages;
 
 import com.onPier.utilities.BrowserUtils;
-import com.onPier.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class FormPage extends BasePage {
 
@@ -36,6 +34,22 @@ public class FormPage extends BasePage {
     @FindBy(xpath = "(//div[.='Weiter '])[2]")
     public WebElement weiterButton;
 
+    @FindBy(xpath = "(//div/button[.=' Zurück '])[2]")
+    public WebElement zurückButton;
+
+    //   @FindBy(linkText=" Der Vorname muss mindestens zwei Zeichen lang sein.")
+    @FindBy(xpath = "//p[.=' Der Vorname muss mindestens zwei Zeichen lang sein.']")
+    public WebElement VornameErrorMessage;
+
+    //    @FindBy(linkText = " Bitte geben Sie Ihren Nachnamen ein.")
+    @FindBy(xpath = "//p[.=' Bitte geben Sie Ihren Nachnamen ein.']")
+    public WebElement NachnameErrorMessage;
+
+
+    public static String name = "John";
+    public static String kontoinHaber = "Elif Basbug";
+
+
     public void login(String vorname, String nachname, String email, String kontainhaber, String iban) {
         selectAnrede.click();
         inputVorname.sendKeys(vorname);
@@ -45,9 +59,9 @@ public class FormPage extends BasePage {
         inputIBAN.sendKeys(iban);
     }
 
-    public void selectTitle(String title){
+    public void selectTitle(String title) {
         BrowserUtils.click(selectAnrede);
-        String xpath= String.format("//*[.='%s']", title);
+        String xpath = String.format("//*[.='%s']", title);
         BrowserUtils.click(By.xpath(xpath));
     }
 

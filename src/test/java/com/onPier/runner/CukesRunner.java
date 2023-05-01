@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 		features = "src/test/resources/features",
 		glue = "com/onPier/stepDefinitions",
 		dryRun = false,
-		tags = "@happyPath"
+		tags = "@wip"
 )
 
 public class CukesRunner {
