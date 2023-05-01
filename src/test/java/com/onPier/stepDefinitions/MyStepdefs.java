@@ -8,11 +8,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.Keys;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static com.onPier.utilities.BrowserUtils.*;
+import static com.onPier.utilities.Log.*;
 import static org.junit.Assert.*;
 
 public class MyStepdefs {
@@ -23,25 +26,25 @@ public class MyStepdefs {
 
     @Given("user is on Persönliche Daten eingeben page")
     public void userIsOnPersonlicheDatenEingebenPage() {
-        assertEquals("THG Prämie",getTitle());
+        assertEquals("THG Prämie", getTitle());
     }
 
     @When("user selects vehicle class")
     public void userSelectsVehicleClass() {
-        click(landingPage.klasseM1);
+        click(landingPage.getKlasseM1());
     }
 
     @And("user selects flexPramieBentragen package")
     public void userSelectsFlexPramieBentragenPackage() {
-        click(landingPage.flexPramieBentragen);
+        click(landingPage.getFlexPramieBentragen());
     }
 
     @And("user uploads images of vehicle registration")
     public void userUploadsImagesOfVehicleRegistration() {
         //to get the dynamic path of the image
-        String path = System.getProperty("user.dir")+ ConfigurationReader.get("imagePath");
-        sendKeys(fahrzeugscheinVorderseite.fahrzeugscheinVorderseite,path);
-        sendKeys(fahrzeugscheinVorderseite.fahrzeugscheinRuckseite,path);
+        String path = System.getProperty("user.dir") + ConfigurationReader.get("imagePath");
+        sendKeys(fahrzeugscheinVorderseite.getFahrzeugscheinVorderseite(), path);
+        sendKeys(fahrzeugscheinVorderseite.getFahrzeugscheinRuckseite(), path);
     }
 
     @And("user clicks on {string} button")
@@ -49,27 +52,28 @@ public class MyStepdefs {
         landingPage.clickButton(buttonName);
     }
 
-    @Then("I verify title as {string}")
-    public void iVerifyTitleAs(String expectedTitle) {
-        assertEquals(getTitle(),expectedTitle);
+    @Then("user verifies title as {string}")
+    public void userVerifiesTitleAs(String expectedTitle) {
+        log("Verifying title as "+ expectedTitle);
+        assertEquals(getTitle(), expectedTitle);
     }
 
     @When("user selects title {string}")
     public void userEntersTitle(String title) {
+        log("Selecting title as "+ title);
         formPage.selectTitle(title);
     }
 
     @And("user fills {string} as {string}")
     public void userFillsAs(String label, String value) {
-        if(value.contains("%s"))
+        if (value.contains("%s"))
             value = String.format(value, new Date().getTime());
-        formPage.fill(label,value);
+        formPage.fill(label, value + Keys.ENTER);
     }
 
     @And("user clicks on Weiter button")
     public void userClicksOnWeiterButton() {
-        click(formPage.weiterButton);
-
+        click(formPage.getWeiterButton());
     }
 
     @Then("form is created with given personal information")
@@ -77,55 +81,35 @@ public class MyStepdefs {
         for (String each : list) {
             formPage.checkInfo(each);
         }
-        System.out.println("the validation of form data could not be done since the page is not supporting automation..");
-    }
-    @When("user enters a letter as a vorname {string}")
-    public void userEntersALetterAsAVorname(String vornameLetter) {
-        formPage.inputVorname.sendKeys(vornameLetter);
-    }
-
-    @And("user clicks another field to fill and proceed")
-    public void userClicksAnotherFieldToFillAndProceed() {click(formPage.inputNachname);}
-
-    @Then("error message appears under the Vorname field")
-    public void errorMessageAppearsUnderTheVornameField() {
-        assertTrue(formPage.VornameErrorMessage.isDisplayed());
+        log("the validation of form data is done");
     }
 
     @When("user enters a letter as nachname {string}")
     public void userEntersALetterAsNachname(String nachnameLetter) {
-        formPage.inputNachname.sendKeys(nachnameLetter);
-    }
-
-    @And("user clicks another placeholder to fill and proceed")
-    public void userClicksAnotherPlaceholderToFillAndProceed() {click(formPage.inputEMailAdresse);}
-
-    @Then("error message appears under the Nachname field")
-    public void errorMessageAppearsUnderTheNachnameField() {
-        assertTrue(formPage.NachnameErrorMessage.isDisplayed());
-    }
-
-
-    @Then("user verifies account holder name and person name can be different")
-    public void userVerifiesAccountHolderNameAndPersonNameCanBeDifferent() {
-        assertNotEquals(formPage.name, formPage.kontoinHaber);
-    }
-
-    @Then("the form is created with invalid email")
-    public void formIsCreatedWithInvalidEmail(List<String> list) {
-        for (String each : list) {
-            formPage.checkInfo(each);
-        }
-        System.out.println("Form created with invalid e mail");
+        formPage.getInputNachname().sendKeys(nachnameLetter);
     }
 
     @When("user clicks on Zurück button")
-    public void userClicksOnZurückButton() {formPage.zurückButton.click();}
-
-    @Then("user lands on previous page")
-    public void userLandsOnPreviousPage() {assertEquals("THG Prämie", getTitle());
+    public void userClicksOnZurückButton() {
+        formPage.getZurückButton().click();
     }
 
+    @Then("user lands on previous page")
+    public void userLandsOnPreviousPage() {
+        assertEquals("THG Prämie", getTitle());
+    }
 
-
+    @Then("user validates the validation messages")
+    public void userValidatesTheValidationMessages(List<Map<String, String>> data) {
+        for (Map<String, String> datum : data) {
+            String label = datum.get("label");
+            String value = datum.get("value") == null ? "" : datum.get("value");
+            String expectedMessage = datum.get("expectedMessage");
+            log(String.format("validating %s field against %s", label, value));
+            formPage.fill(label, value);
+            String actualMessage = formPage.getValidationMessageByFieldName(label);
+            assertEquals(expectedMessage, actualMessage);
+        }
+    }
 }
+

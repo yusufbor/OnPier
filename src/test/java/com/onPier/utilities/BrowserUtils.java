@@ -7,7 +7,7 @@ import java.util.List;
 public class BrowserUtils {
 
     public static boolean isPresent(By by) {
-       return getElements(by).size()>0;
+        return getElements(by).size() > 0;
     }
 
     public static WebElement getElemet(By by) {
@@ -63,5 +63,12 @@ public class BrowserUtils {
 
     public static String getTitle() {
         return Driver.getDriver().getTitle();
+    }
+
+    public static boolean isDisplayed(By by) {
+        if (isPresent(by))
+            return getElemet(by).isDisplayed();
+        else
+            throw new java.util.NoSuchElementException("Element couln't be found while checing is displayed.");
     }
 }

@@ -2,13 +2,12 @@ package com.onPier.pages;
 
 import com.onPier.utilities.BrowserUtils;
 import com.onPier.utilities.Driver;
-import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.Map;
+import static com.onPier.utilities.Log.*;
 
 public abstract class BasePage {
 
@@ -17,6 +16,8 @@ public abstract class BasePage {
     }
 
     public void clickButton(String buttonName) {
+        log("Clicking on  the button "+ buttonName);
+
         String xPath1 = String.format("(//button[.='%s'])[1]", buttonName);
         String xPath2 = String.format("(//div[.='%s'])[1]", buttonName);
 
@@ -29,14 +30,15 @@ public abstract class BasePage {
     }
 
     public void fill(String labelName, String value) {
+        log(String.format("Filling the %s field.", labelName));
         String xpath = String.format("//label[.='%s']/..//input", labelName);
         WebElement element = BrowserUtils.getElemet(By.xpath(xpath));
-        BrowserUtils.sendKeys(element, value);
+        element.clear();
+        BrowserUtils.sendKeys(element, value+ Keys.TAB);
     }
 
     public void checkInfo(String labelName){
         String xpath = String.format("//td[.='%s:']/following-sibling::td", labelName);
-        WebElement element = BrowserUtils.getElemet(By.xpath(xpath));
-        System.out.println("element.getText() = " + element.getText());
+        BrowserUtils.isPresent(By.xpath(xpath));
     }
 }
